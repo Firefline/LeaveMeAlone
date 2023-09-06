@@ -38,6 +38,8 @@ ALMADefaultCharacter::ALMADefaultCharacter()
     bUseControllerRotationYaw = false;
     bUseControllerRotationRoll = false;
 
+    SprintMultiplier = 2.5f;
+
 }
 
 // Called when the game starts or when spawned
@@ -91,8 +93,12 @@ void ALMADefaultCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
     PlayerInputComponent->BindAxis("MoveForward", this, &ALMADefaultCharacter::MoveForward);
     PlayerInputComponent->BindAxis("MoveRight", this, &ALMADefaultCharacter::MoveRight);
+
     PlayerInputComponent->BindAction("ZoomIn", EInputEvent::IE_Pressed, this, &ALMADefaultCharacter::ZoomIn);
     PlayerInputComponent->BindAction("ZoomOut", EInputEvent::IE_Pressed, this, &ALMADefaultCharacter::ZoomOut);
+
+    PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ALMADefaultCharacter::StartSprint);
+    PlayerInputComponent->BindAction("Sprint", IE_Released, this, &ALMADefaultCharacter::StopSprint);
 
 }
 
@@ -163,5 +169,17 @@ void ALMADefaultCharacter::RotationPlayerOnCursor()
         }
 
     }
+
+}
+
+void ALMADefaultCharacter::StartSprint() 
+{
+    GetCharacterMovement()->MaxWalkSpeed *= SprintMultiplier;
+
+}
+
+void ALMADefaultCharacter::StopSprint() 
+{
+    GetCharacterMovement()->MaxWalkSpeed /= SprintMultiplier;
 
 }

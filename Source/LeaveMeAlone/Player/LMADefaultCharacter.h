@@ -39,6 +39,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Cursor")
     FVector CursorSize = FVector(20.0f, 40.0f, 40.0f);
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components|Health")
+    ULMAHealthComponent *HealthComponent;
+
+    UPROPERTY(EditDefaultsOnly, Category = "Animation")
+    UAnimMontage *DeathMontage;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera|Zoom")
     float MinZoomLength = 500.0f;
 
@@ -48,11 +54,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera|Zoom")
     float ZoomStep = 50.0f;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components|Health")
-    ULMAHealthComponent *HealthComponent;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Animation")
-    UAnimMontage *DeathMontage;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character")
+    float SprintMultiplier;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -71,6 +74,9 @@ private:
     void OnHealthChanged(float NewHealth);
 
 	void RotationPlayerOnCursor();
+
+	void StartSprint();
+    void StopSprint();
 	
 
 public:	
