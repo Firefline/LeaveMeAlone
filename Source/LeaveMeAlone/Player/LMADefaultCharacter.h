@@ -54,8 +54,17 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera|Zoom")
     float ZoomStep = 50.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Sprint")
     float SprintMultiplier;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Sprint")
+    float CurrentStamina;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Sprint")
+    float MaxStamina;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Sprint")
+    float StaminaRegenMultiplier;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -77,6 +86,8 @@ private:
 
 	void StartSprint();
     void StopSprint();
+    void StaminaRegen();
+    bool IsSprinting;
 	
 
 public:	

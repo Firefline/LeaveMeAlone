@@ -39,6 +39,10 @@ ALMADefaultCharacter::ALMADefaultCharacter()
     bUseControllerRotationRoll = false;
 
     SprintMultiplier = 2.5f;
+    IsSprinting = false;
+    CurrentStamina = 250.0f;
+    MaxStamina = 250.0f;
+    StaminaRegenMultiplier = 1.0f;
 
 }
 
@@ -67,9 +71,8 @@ void ALMADefaultCharacter::Tick(float DeltaTime)
     if (HealthComponent->IsAlive()) 
     {
         RotationPlayerOnCursor();
-
+        StaminaRegen();
     }
-
 
     APlayerController *PC = UGameplayStatics::GetPlayerController(GetWorld(), 0);
     if (PC) 
@@ -174,12 +177,36 @@ void ALMADefaultCharacter::RotationPlayerOnCursor()
 
 void ALMADefaultCharacter::StartSprint() 
 {
+    IsSprinting = true;
     GetCharacterMovement()->MaxWalkSpeed *= SprintMultiplier;
 
 }
 
 void ALMADefaultCharacter::StopSprint() 
 {
+    if (IsSprinting == false) return;
+    IsSprinting = false;
     GetCharacterMovement()->MaxWalkSpeed /= SprintMultiplier;
+
+}
+
+void ALMADefaultCharacter::StaminaRegen() 
+{
+    if (!(CurrentStamina > 0)) 
+    {
+        IsSprinting = false;
+        GetCharacterMovement()->MaxWalkSpeed /= SprintMultiplier;
+
+    }
+    if (CurrentStamina < MaxStamina && IsSprinting == false) 
+    {
+        CurrentStamina += StaminaRegenMultiplier;
+    
+    }
+    if (CurrentStamina > 0 && IsSprinting == true) 
+    {
+        CurrentStamina -= StaminaRegenMultiplier / 1.2;
+    
+    }
 
 }
