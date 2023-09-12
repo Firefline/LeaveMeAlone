@@ -10,6 +10,7 @@ class UCameraComponent;
 class USpringArmComponent;
 class ULMAHealthComponent;
 class UAnimMontage;
+class ULMAWeaponComponent;
 
 UCLASS()
 class LEAVEMEALONE_API ALMADefaultCharacter : public ACharacter
@@ -65,6 +66,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character|Sprint")
     float StaminaRegenMultiplier;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+    ULMAWeaponComponent *WeaponComponent;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
