@@ -36,6 +36,9 @@ public:
     void StopFire();
     void Reload();
 
+	UFUNCTION(BlueprintCallable)
+    bool GetCurrentWeaponAmmo(FAmmoWeapon &AmmoWeapon) const;
+
 private:
     UPROPERTY()
     ALMABaseWeapon *Weapon = nullptr;
