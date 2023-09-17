@@ -9,6 +9,7 @@
 DECLARE_MULTICAST_DELEGATE(FOnCurrentClipEmpty)
 
 class USkeletalMeshComponent;
+class USoundWave;
 
 USTRUCT(BlueprintType)
 struct FAmmoWeapon 
@@ -55,6 +56,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
     FAmmoWeapon AmmoWeapon{30, 0, true};
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
+    USoundWave *ShootWave;
 
     void Shoot();
 

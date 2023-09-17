@@ -3,6 +3,7 @@
 
 #include "LMABaseWeapon.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogWeapon, All, All);
 
@@ -54,6 +55,7 @@ void ALMABaseWeapon::Shoot()
     const FVector ShootDirection = SocketTransform.GetRotation().GetForwardVector();
     const FVector TraceEnd = TraceStart + ShootDirection * TraceDistance;
     DrawDebugLine(GetWorld(), TraceStart, TraceEnd, FColor::Black, false, 1.0f, 0, 2.0f);
+    UGameplayStatics::PlaySoundAtLocation(GetWorld(), ShootWave, TraceStart);
 
     FHitResult HitResult;
     GetWorld()->LineTraceSingleByChannel(HitResult, TraceStart, TraceEnd,
