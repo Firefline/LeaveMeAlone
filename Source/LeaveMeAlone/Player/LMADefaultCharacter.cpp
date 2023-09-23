@@ -114,12 +114,17 @@ void ALMADefaultCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 void ALMADefaultCharacter::MoveForward(float Value) 
 {
-    AddMovementInput(GetActorForwardVector(), Value);
+    //AddMovementInput(GetActorForwardVector(), Value);
+    FVector CameraDirection = CameraComponent->GetForwardVector();
+    CameraDirection.X += abs(Value);
+    AddMovementInput(CameraDirection, Value);
 
 }
+
 void ALMADefaultCharacter::MoveRight(float Value) 
 {
-    AddMovementInput(GetActorRightVector(), Value);
+    //AddMovementInput(GetActorRightVector(), Value);
+    AddMovementInput(CameraComponent->GetRightVector(), Value);
 
 }
 

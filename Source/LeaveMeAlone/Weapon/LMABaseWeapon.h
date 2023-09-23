@@ -67,6 +67,9 @@ protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
     FString TraceName = "Tracer";
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
+    float Damage = 20;
+
     void SpawnTrace(const FVector &TraceStart, const FVector &TraceEnd);
 
     void Shoot();
@@ -74,6 +77,7 @@ protected:
 	void DecrementBullets();
     bool IsCurrentClipEmpty() const;
     
+	void MakeDamage(const FHitResult &HitResult);
 
 	FTimerHandle TimerHandle;
 
