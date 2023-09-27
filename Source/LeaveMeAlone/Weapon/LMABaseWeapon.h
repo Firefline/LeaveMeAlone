@@ -53,7 +53,7 @@ protected:
     USkeletalMeshComponent *WeaponComponent;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
-    float TraceDistance = 800.0f;
+    float TraceDistance = 1800.0f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
     FAmmoWeapon AmmoWeapon{30, 0, true};
@@ -68,7 +68,7 @@ protected:
     FString TraceName = "Tracer";
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
-    float Damage = 20;
+    float Damage = 25;
 
     void SpawnTrace(const FVector &TraceStart, const FVector &TraceEnd);
 
