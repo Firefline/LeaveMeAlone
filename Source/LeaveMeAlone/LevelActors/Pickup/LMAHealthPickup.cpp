@@ -5,6 +5,7 @@
 #include "LeaveMeAlone/Components/LMAHealthComponent.h"
 #include "Components/SphereComponent.h"
 #include "LeaveMeAlone/Player/LMADefaultCharacter.h"
+#include "LeaveMeAlone/Enemy/LMAEnemyCharacter.h"
 
 // Sets default values
 ALMAHealthPickup::ALMAHealthPickup()
@@ -62,6 +63,9 @@ void ALMAHealthPickup::NotifyActorBeginOverlap(AActor *OtherActor)
 {
     Super::NotifyActorBeginOverlap(OtherActor);
     const auto Charcter = Cast<ALMADefaultCharacter>(OtherActor);
+    const auto Enemy = Cast<ALMAEnemyCharacter>(OtherActor);
+    if (Enemy)
+      return;
     if (GivePickup(Charcter)) 
     {
       PickupWasTaken();

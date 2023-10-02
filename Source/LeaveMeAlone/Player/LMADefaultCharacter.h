@@ -92,6 +92,9 @@ private:
     void StopSprint();
     void StaminaRegen();
     bool IsSprinting;
+
+	void CanFire();
+    void CanReload();
 	
 
 public:	

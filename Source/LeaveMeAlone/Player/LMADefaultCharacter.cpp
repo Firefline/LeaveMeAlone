@@ -106,9 +106,9 @@ void ALMADefaultCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
     PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ALMADefaultCharacter::StartSprint);
     PlayerInputComponent->BindAction("Sprint", IE_Released, this, &ALMADefaultCharacter::StopSprint);
 
-    PlayerInputComponent->BindAction("Fire", IE_Pressed, WeaponComponent, &ULMAWeaponComponent::Fire);
+    PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ALMADefaultCharacter::CanFire);
     PlayerInputComponent->BindAction("Fire", IE_Released, WeaponComponent, &ULMAWeaponComponent::StopFire);
-    PlayerInputComponent->BindAction("Reload", IE_Pressed, WeaponComponent, &ULMAWeaponComponent::Reload);
+    PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &ALMADefaultCharacter::CanReload);
 
 }
 
@@ -219,6 +219,26 @@ void ALMADefaultCharacter::StaminaRegen()
     {
         CurrentStamina -= StaminaRegenMultiplier / 1.2;
     
+    }
+
+}
+
+void ALMADefaultCharacter::CanFire() 
+{
+    if (IsSprinting == false) 
+    {
+        WeaponComponent->Fire();
+
+    }
+
+}
+
+void ALMADefaultCharacter::CanReload() 
+{
+    if (IsSprinting == false) 
+    {
+        WeaponComponent->Reload();
+
     }
 
 }

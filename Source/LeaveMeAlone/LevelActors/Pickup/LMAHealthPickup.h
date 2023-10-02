@@ -8,6 +8,7 @@
 
 class USphereComponent;
 class ALMADefaultCharacter;
+class ALMAEnemyCharacter;
 
 UCLASS()
 class LEAVEMEALONE_API ALMAHealthPickup : public AActor
